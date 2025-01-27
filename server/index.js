@@ -8,13 +8,14 @@ app.use(express.json());
 //connect database
 mongoose
   .connect(
-    "mongodb+srv://crud:crud@cluster0.qa3ft.mongodb.net/crud?retryWrites=true&w=majority&appName=Cluster0"
+    "mongodb+srv://mern2309:mern2309@cluster0.qa3ft.mongodb.net/mern2309?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => {
     console.log("database is connected ");
   });
 
 //   model
+
 const todo = mongoose.model("Todo", {
   name: String,
   age: Number,
@@ -49,6 +50,18 @@ app.delete("/deletetodo/:id", async (req, res) => {
   res
     .status(200)
     .send({ success: true, msg: "deleted successfull", data: deletetodo });
+});
+
+app.patch("/updatetodo/:id", async (req, res) => {
+  let { id } = req.params;
+  let { name } = req.body;
+
+  let result = await todo.findOneAndUpdate(
+    { _id: id },
+    { name },
+    { new: true }
+  );
+  res.send(result);
 });
 
 app.listen(3000, () => {

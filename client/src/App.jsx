@@ -60,6 +60,12 @@ const App = () => {
                 >
                   delete
                 </button>
+                <button
+                  // onClick={() => handledelete(item._id)}
+                  className=" bg-green-500 text-white py-1 px-2 rounded-md"
+                >
+                  update
+                </button>
               </li>
             );
           })}
